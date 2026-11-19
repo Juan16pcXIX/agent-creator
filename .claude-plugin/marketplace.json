@@ -1,0 +1,14 @@
+{
+  "name": "agent-creator",
+  "description": "Build a team of Claude Code agents for any project, with model routing per agent.",
+  "owner": {
+    "name": "Juan16pcXIX"
+  },
+  "plugins": [
+    {
+      "name": "agent-creator",
+      "source": "./plugins/agent-creator",
+      "description": "Turns any project, brand, person or goal into a tree of Claude Code agents, each on the cheapest model that does its job well."
+    }
+  ]
+}

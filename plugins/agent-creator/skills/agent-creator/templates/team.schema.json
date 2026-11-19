@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "agent-creator team plan",
+  "type": "object",
+  "required": ["version", "root", "settings", "branches"],
+  "properties": {
+    "version": { "const": 1 },
+    "created": { "type": "string", "description": "ISO date" },
+    "root": {
+      "type": "object",
+      "required": ["slug", "name", "archetype", "summary"],
+      "properties": {
+        "slug": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+        "name": { "type": "string" },
+        "archetype": { "enum": ["business", "creator", "artist", "software", "operations", "research", "personal", "custom"] },
+        "summary": { "type": "string" },
+        "diagnosis": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "settings": {
+      "type": "object",
+      "required": ["expertise", "budget", "install", "language"],
+      "properties": {
+        "expertise": { "enum": ["practical", "professional", "expert"] },
+        "budget": { "enum": ["economical", "balanced", "max"] },
+        "install": { "enum": ["project", "user"] },
+        "language": { "type": "string" },
+        "autonomy": { "enum": ["prepare-and-ask", "act-within-limits"] },
+        "work_folder": { "type": "string" }
+      }
+    },
+    "branches": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["slug", "name", "leaves"],
+        "properties": {
+          "slug": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "name": { "type": "string" },
+          "expertise": { "enum": ["practical", "professional", "expert"], "description": "Overrides the global level for this branch" },
+          "lead": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/agent" }] },
+          "leaves": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/agent" } }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "agent": {
+      "type": "object",
+      "required": ["name", "objective", "model", "effort", "score"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$", "description": "Short leaf name (full name is <root>-<branch>-<name>), or the full current name of an existing agent" },
+        "objective": { "type": "string" },
+        "origin": { "enum": ["proposed", "suggested", "user", "existing"], "default": "proposed", "description": "Who put it in the team" },
+        "existing_action": { "enum": ["keep", "upgrade"], "description": "Only for origin=existing" },
+        "file": { "type": "string", "description": "Path of an existing agent file, when it lives outside the install location" },
+        "uses": { "type": "array", "items": { "type": "string" }, "description": "Skills or connectors the agent works through, e.g. canva, last30days" },
+        "verifier": { "type": "boolean", "default": false },
+        "model": { "enum": ["haiku", "sonnet", "opus", "fable", "inherit"] },
+        "effort": { "enum": ["low", "medium", "high", "xhigh", "max"] },
+        "score": {
+          "type": "object",
+          "required": ["depth", "ambiguity", "error_cost", "horizon", "judgment"],
+          "properties": {
+            "depth": { "enum": [0, 1, 2] },
+            "ambiguity": { "enum": [0, 1, 2] },
+            "error_cost": { "enum": [0, 1, 2] },
+            "horizon": { "enum": [0, 1, 2] },
+            "judgment": { "enum": [0, 1, 2] }
+          }
+        },
+        "adjustments": { "type": "array", "items": { "type": "string" } },
+        "inputs": { "type": "array", "items": { "type": "string" } },
+        "outputs": { "type": "array", "items": { "type": "string" } },
+        "done_when": { "type": "string" }
+      }
+    }
+  }
+}

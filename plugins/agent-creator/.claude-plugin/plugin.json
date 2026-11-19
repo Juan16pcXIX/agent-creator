@@ -1,0 +1,7 @@
+{
+  "name": "agent-creator",
+  "description": "Turns any project, brand, person or goal into a tree of Claude Code agents: department leads and single-purpose subagents, each on the cheapest model that does its job well.",
+  "version": "0.1.0",
+  "license": "MIT",
+  "keywords": ["agents", "subagents", "team", "orchestration", "model-routing", "skills"]
+}

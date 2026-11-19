@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "created": "2026-11-19",
+  "root": {
+    "slug": "norte",
+    "name": "Norte",
+    "archetype": "business",
+    "summary": "Small streetwear brand from Bogotá selling on Instagram, TikTok and Shopify to 18-28 year olds, growing through limited drops.",
+    "diagnosis": [
+      "Streetwear brand run by two people, sells online through drops.",
+      "Covered: product design, Instagram posting by hand.",
+      "Gap: no content calendar; posts are improvised the day of.",
+      "Gap: no check before posting; wrong prices and dates have gone out.",
+      "Gap: cash for each drop planned by gut feeling."
+    ]
+  },
+  "settings": {
+    "expertise": "professional",
+    "budget": "balanced",
+    "install": "project",
+    "language": "English",
+    "autonomy": "prepare-and-ask",
+    "work_folder": "marketing/ and finance/"
+  },
+  "branches": [
+    {
+      "slug": "marketing",
+      "name": "Marketing",
+      "lead": {
+        "name": "lead",
+        "objective": "Plan marketing requests, dispatch the marketing agents, return a fact-checked package",
+        "model": "sonnet",
+        "effort": "medium",
+        "score": { "depth": 1, "ambiguity": 1, "error_cost": 1, "horizon": 1, "judgment": 1 },
+        "adjustments": ["lead that routes: sonnet medium"]
+      },
+      "leaves": [
+        {
+          "name": "strategist",
+          "objective": "Content and campaign plan for the next 2-4 weeks",
+          "model": "opus",
+          "effort": "high",
+          "score": { "depth": 2, "ambiguity": 2, "error_cost": 1, "horizon": 2, "judgment": 2 },
+          "outputs": ["marketing/<job>/plan.md"],
+          "done_when": "Every date has a slot, every piece has an executable brief, one metric named"
+        },
+        {
+          "name": "trend-scout",
+          "objective": "Ranked list of this week's usable trends with links",
+          "model": "haiku",
+          "effort": "medium",
+          "score": { "depth": 1, "ambiguity": 1, "error_cost": 1, "horizon": 0, "judgment": 1 },
+          "outputs": ["marketing/<job>/trends.md"]
+        },
+        {
+          "name": "carousel-writer",
+          "objective": "One Instagram carousel from a brief",
+          "model": "sonnet",
+          "effort": "medium",
+          "score": { "depth": 1, "ambiguity": 1, "error_cost": 1, "horizon": 1, "judgment": 2 },
+          "adjustments": ["audience-facing floor: at least sonnet"],
+          "outputs": ["marketing/<job>/<piece>-carousel.md"]
+        },
+        {
+          "name": "fact-checker",
+          "objective": "PASS or a list of problems for one piece",
+          "verifier": true,
+          "model": "sonnet",
+          "effort": "medium",
+          "score": { "depth": 1, "ambiguity": 1, "error_cost": 2, "horizon": 0, "judgment": 1 },
+          "adjustments": ["verifier rule: as strong as the writer"]
+        },
+        {
+          "name": "canva-designer",
+          "objective": "Build one approved carousel in Canva with the brand template",
+          "origin": "user",
+          "uses": ["canva"],
+          "model": "sonnet",
+          "effort": "medium",
+          "score": { "depth": 1, "ambiguity": 0, "error_cost": 1, "horizon": 0, "judgment": 2 },
+          "adjustments": ["audience-facing floor: at least sonnet"],
+          "outputs": ["Canva design link"]
+        },
+        {
+          "name": "product-photo-editor",
+          "objective": "Clean product photos for the store",
+          "origin": "existing",
+          "existing_action": "keep",
+          "model": "inherit",
+          "effort": "low",
+          "score": { "depth": 0, "ambiguity": 0, "error_cost": 1, "horizon": 0, "judgment": 0 }
+        }
+      ]
+    },
+    {
+      "slug": "finance",
+      "name": "Finance",
+      "lead": null,
+      "leaves": [
+        {
+          "name": "bookkeeper",
+          "objective": "Categorize one transaction export",
+          "model": "haiku",
+          "effort": "low",
+          "score": { "depth": 0, "ambiguity": 0, "error_cost": 1, "horizon": 0, "judgment": 1 },
+          "outputs": ["finance/books/<YYYY-MM>-<source>.csv"]
+        },
+        {
+          "name": "cashflow-forecaster",
+          "objective": "13-week cash forecast with risky weeks flagged",
+          "model": "opus",
+          "effort": "medium",
+          "score": { "depth": 2, "ambiguity": 1, "error_cost": 2, "horizon": 2, "judgment": 1 },
+          "outputs": ["finance/forecast/<date>.md"]
+        }
+      ]
+    }
+  ]
+}
